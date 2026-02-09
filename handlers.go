@@ -306,3 +306,73 @@ func DeletePage(c *gin.Context) {
 		"message": "Page deleted successfully",
 	})
 }
+
+// Allowed widget types
+var validWidgetTypes = map[string]bool{
+	"banner":       true,
+	"product_grid": true,
+	"text":         true,
+}
+
+// CreateWidget - POST /pages/:id/widgets
+func CreateWidget(c *gin.Context) {
+	pageID := c.Param("id")
+
+	var widget Widget
+
+	// 1: Check if page exists
+	var exists bool
+	err := DB.QueryRow(`SELECT 1 FROM pages WHERE id = $1`, pageID).Scan(&exists)
+
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Database error")
+		return
+	}
+
+	// If exists is false, the !exists = true, then
+	if !exists {
+		errorResponse(c, http.StatusNotFound, "NOT_FOUND", "Page not found")
+		return
+	}
+
+	// 2: Read JSON body
+	if err := c.ShouldBindJSON(&widget); err != nil {
+		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "Invalid request body")
+		return
+	}
+
+	// 3: Validate widget type
+	if !validWidgetTypes[widget.Type] {
+		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "Invalid widget type")
+		return
+	}
+
+	// 4: Generate UUID and timestamps
+	widget.ID = uuid.New().String()
+	widget.PageID = pageID
+	widget.CreatedAt = time.Now()
+	widget.UpdatedAt = time.Now()
+
+	// 5: Insert into DB
+	query := `
+		INSERT INTO widgets (id, page_id, type, position, config, created_at, updated_at)
+		VALUES ($1, $2, $3, $4, $5, $6, $7)`
+
+	_, err = DB.Exec(
+		query,
+		widget.ID,
+		widget.PageID,
+		widget.Type,
+		widget.Position,
+		widget.Config,
+		widget.CreatedAt,
+		widget.UpdatedAt,
+	)
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Failed to create widget")
+		return
+	}
+
+	// 6: Return created widget
+	c.JSON(http.StatusCreated, widget)
+}
