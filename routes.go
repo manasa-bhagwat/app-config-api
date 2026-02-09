@@ -6,4 +6,6 @@ func SetupRoutes(router *gin.Engine) {
 	router.POST("/pages", CreatePage)
 	router.GET("/pages", GetPages)
 	router.GET("/pages/:id", GetPageByID)
+	router.PUT("/pages/:id", UpdatePage)
+
 }

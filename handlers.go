@@ -186,3 +186,81 @@ func GetPageByID(c *gin.Context) {
 		"widgets": widgets,
 	})
 }
+
+// UpdatePage - PUT /pages/:id
+func UpdatePage(c *gin.Context) {
+	id := c.Param("id")
+
+	var input Page
+
+	// 1: Read JSON body
+	if err := c.ShouldBindJSON(&input); err != nil {
+		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "Invalid request body")
+		return
+	}
+
+	// 2: Validate required fields
+	if input.Name == "" {
+		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "Page name is required")
+		return
+	}
+
+	if input.Route == "" {
+		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "Route is required")
+		return
+	}
+
+	// 3: Check if page exists
+	var existing Page
+	err := DB.QueryRow(`
+		SELECT id, is_home
+		FROM pages
+		WHERE id = $1
+	`, id).Scan(&existing.ID, &existing.IsHome)
+
+	if err == sql.ErrNoRows {
+		errorResponse(c, http.StatusNotFound, "NOT_FOUND", "Page not found")
+		return
+	}
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Database error")
+		return
+	}
+
+	// 4: If is_home = true, ensure no other home page exists
+	if input.IsHome {
+		var count int
+		err := DB.QueryRow(`
+			SELECT COUNT(*) FROM pages 
+			WHERE is_home = true AND id != $1
+		`, id).Scan(&count)
+		if err != nil {
+			errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Database error")
+			return
+		}
+
+		if count > 0 {
+			errorResponse(c, http.StatusConflict, "CONFLICT", "Another home page already exists")
+			return
+		}
+	}
+
+	// 5: Update page
+	query := `
+		UPDATE pages
+		SET name = $1, route = $2, is_home = $3, updated_at = $4
+		WHERE id = $5
+	`
+
+	_, err = DB.Exec(query, input.Name, input.Route, input.IsHome, time.Now(), id)
+	if err != nil {
+		errorResponse(c, http.StatusConflict, "CONFLICT", "Route may already exist")
+		return
+	}
+
+	// 6: Return updated page
+	input.ID = id
+	input.UpdatedAt = time.Now()
+
+	c.JSON(http.StatusOK, input)
+}
