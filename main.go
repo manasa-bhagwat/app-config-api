@@ -9,7 +9,9 @@ func main() {
 	// connect to DB
 	InitDB()
 
-	router := gin.Default()
+	router := gin.New()
+	router.Use(RequestLogger())
+	router.Use(gin.Recovery())
 
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(200, gin.H{
