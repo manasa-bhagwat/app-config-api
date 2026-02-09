@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"net/http"
 	"time"
 
@@ -112,4 +113,76 @@ func GetPages(c *gin.Context) {
 	// Return list of pages
 	c.JSON(http.StatusOK, pages)
 
+}
+
+// GetPageByID - GET /pages/:id
+func GetPageByID(c *gin.Context) {
+	id := c.Param("id") // read ID from URL
+
+	var page Page
+
+	// 1: Fetch page
+	err := DB.QueryRow(`
+		SELECT id, name, route, is_home, created_at, updated_at
+		FROM pages
+		WHERE id = $1
+	`, id).Scan(
+		&page.ID,
+		&page.Name,
+		&page.Route,
+		&page.IsHome,
+		&page.CreatedAt,
+		&page.UpdatedAt,
+	)
+
+	// If no page found
+	if err == sql.ErrNoRows {
+		errorResponse(c, http.StatusNotFound, "NOT_FOUND", "Page not found")
+		return
+	}
+
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Database error")
+		return
+	}
+
+	// 2: Fetch widgets for this page
+	rows, err := DB.Query(`
+		SELECT id, page_id, type, position, config, created_at, updated_at
+		FROM widgets
+		WHERE page_id = $1
+		ORDER BY position
+	`, id)
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Failed to fetch widgets")
+		return
+	}
+	defer rows.Close()
+
+	var widgets []Widget
+
+	for rows.Next() {
+		var w Widget
+		err := rows.Scan(
+			&w.ID,
+			&w.PageID,
+			&w.Type,
+			&w.Position,
+			&w.Config,
+			&w.CreatedAt,
+			&w.UpdatedAt,
+		)
+		if err != nil {
+			errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Failed to read widget data")
+			return
+		}
+
+		widgets = append(widgets, w)
+	}
+
+	// 3: Return page + widgets
+	c.JSON(http.StatusOK, gin.H{
+		"page":    page,
+		"widgets": widgets,
+	})
 }
