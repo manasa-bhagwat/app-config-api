@@ -466,3 +466,58 @@ func DeleteWidget(c *gin.Context) {
 		"message": "Widget deleted successfully",
 	})
 }
+
+// ReorderWidgets - POST /pages/:id/widgets/reorder
+func ReorderWidgets(c *gin.Context) {
+	pageID := c.Param("id")
+
+	var req ReorderRequest
+
+	// 1: Read request body
+	if err := c.ShouldBindJSON(&req); err != nil {
+		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "Invalid request body")
+		return
+	}
+
+	if len(req.WidgetIDs) == 0 {
+		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "widget_ids cannot be empty")
+		return
+	}
+
+	// 2: Check if page exists
+	var exists bool
+	err := DB.QueryRow(`
+		SELECT EXISTS(SELECT 1 FROM pages WHERE id = $1)
+	`, pageID).Scan(&exists)
+
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Database error")
+		return
+	}
+
+	if !exists {
+		errorResponse(c, http.StatusNotFound, "NOT_FOUND", "Page not found")
+		return
+	}
+
+	// 3: Update positions one by one
+	for index, widgetID := range req.WidgetIDs {
+		position := index + 1
+
+		_, err := DB.Exec(`
+			UPDATE widgets
+			SET position = $1, updated_at = $2
+			WHERE id = $3 AND page_id = $4
+		`, position, time.Now(), widgetID, pageID)
+
+		if err != nil {
+			errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Failed to reorder widgets")
+			return
+		}
+	}
+
+	// 4: Success response
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Widgets reordered successfully",
+	})
+}

@@ -25,3 +25,8 @@ type Widget struct {
 	CreatedAt time.Time       `json:"created_at"`
 	UpdatedAt time.Time       `json:"updated_at"`
 }
+
+// ReorderRequest represents new order of widgets
+type ReorderRequest struct {
+	WidgetIDs []string `json:"widget_ids"`
+}
