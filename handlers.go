@@ -72,3 +72,44 @@ func CreatePage(c *gin.Context) {
 	// 6. Return created page
 	c.JSON(http.StatusCreated, page)
 }
+
+// GetPages - GET /pages
+func GetPages(c *gin.Context) {
+	var pages []Page
+
+	// Query all pages
+	rows, err := DB.Query(`
+		SELECT id, name, route, is_home, created_at, updated_at
+		FROM pages
+		ORDER BY created_at
+	`)
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Failed to fetch pages")
+		return
+	}
+
+	defer rows.Close()
+
+	// Iterate over result set
+	for rows.Next() {
+		var page Page
+		err := rows.Scan(
+			&page.ID,
+			&page.Name,
+			&page.Route,
+			&page.IsHome,
+			&page.CreatedAt,
+			&page.UpdatedAt,
+		)
+		if err != nil {
+			errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Failed to read page data")
+			return
+		}
+
+		pages = append(pages, page)
+	}
+
+	// Return list of pages
+	c.JSON(http.StatusOK, pages)
+
+}
