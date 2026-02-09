@@ -1,0 +1,835 @@
+{
+  "info": {
+    "_postman_id": "7578ebb7-c73e-4b47-84dd-7da97734cf02",
+    "name": "App Cofig API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52234183",
+    "_collection_link": "https://go.postman.co/collection/52234183-7578ebb7-c73e-4b47-84dd-7da97734cf02?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Pages",
+      "item": [
+        {
+          "name": "Create a page",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"About\",\r\n  \"route\": \"/about\",\r\n  \"is_home\": false\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/pages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Home",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Home\",\r\n  \"route\": \"/home\",\r\n  \"is_home\": false\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/pages",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:34:49 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "226"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"f9808425-79ba-471c-b354-bd429c66d753\",\n    \"name\": \"Home\",\n    \"route\": \"/home\",\n    \"is_home\": false,\n    \"created_at\": \"2026-02-10T00:04:49.9253514+05:30\",\n    \"updated_at\": \"2026-02-10T00:04:49.9253514+05:30\"\n}"
+            },
+            {
+              "name": "About",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"About\",\r\n  \"route\": \"/about\",\r\n  \"is_home\": false\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/pages",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:35:36 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "228"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"785dc254-5343-498d-afe4-9343c3894f9b\",\n    \"name\": \"About\",\n    \"route\": \"/about\",\n    \"is_home\": false,\n    \"created_at\": \"2026-02-10T00:05:36.0442721+05:30\",\n    \"updated_at\": \"2026-02-10T00:05:36.0442721+05:30\"\n}"
+            },
+            {
+              "name": "Help",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Help\",\r\n  \"route\": \"/help\",\r\n  \"is_home\": false\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/pages",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:36:17 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "226"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"b67626ff-4ba3-474e-9f0c-a061b988ff05\",\n    \"name\": \"Help\",\n    \"route\": \"/help\",\n    \"is_home\": false,\n    \"created_at\": \"2026-02-10T00:06:17.9753435+05:30\",\n    \"updated_at\": \"2026-02-10T00:06:17.9753435+05:30\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get all pages",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/pages",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get all pages",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/pages",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:38:36 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "747"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": \"f9808425-79ba-471c-b354-bd429c66d753\",\n        \"name\": \"Home\",\n        \"route\": \"/home\",\n        \"is_home\": true,\n        \"created_at\": \"2026-02-10T00:04:49.925351Z\",\n        \"updated_at\": \"2026-02-10T00:07:51.052602Z\"\n    },\n    {\n        \"id\": \"785dc254-5343-498d-afe4-9343c3894f9b\",\n        \"name\": \"About\",\n        \"route\": \"/about\",\n        \"is_home\": false,\n        \"created_at\": \"2026-02-10T00:05:36.044272Z\",\n        \"updated_at\": \"2026-02-10T00:05:36.044272Z\"\n    },\n    {\n        \"id\": \"b67626ff-4ba3-474e-9f0c-a061b988ff05\",\n        \"name\": \"Help\",\n        \"route\": \"/help\",\n        \"is_home\": false,\n        \"created_at\": \"2026-02-10T00:06:17.975344Z\",\n        \"updated_at\": \"2026-02-10T00:06:17.975344Z\"\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Update pages",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Home\",\r\n  \"route\": \"/home\",\r\n  \"is_home\": true\r\n}\r\n"
+            },
+            "url": {
+              "raw": "{{base_url}}/pages/f9808425-79ba-471c-b354-bd429c66d753",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "f9808425-79ba-471c-b354-bd429c66d753"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update pages",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Home\",\r\n  \"route\": \"/home\",\r\n  \"is_home\": true\r\n}\r\n"
+                },
+                "url": {
+                  "raw": "{{base_url}}/pages/f9808425-79ba-471c-b354-bd429c66d753",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages",
+                    "f9808425-79ba-471c-b354-bd429c66d753"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:37:51 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "212"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"f9808425-79ba-471c-b354-bd429c66d753\",\n    \"name\": \"Home\",\n    \"route\": \"/home\",\n    \"is_home\": true,\n    \"created_at\": \"0001-01-01T00:00:00Z\",\n    \"updated_at\": \"2026-02-10T00:07:51.0577818+05:30\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete a page",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/pages/b67626ff-4ba3-474e-9f0c-a061b988ff05",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "b67626ff-4ba3-474e-9f0c-a061b988ff05"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete a page",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/pages/b67626ff-4ba3-474e-9f0c-a061b988ff05",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages",
+                    "b67626ff-4ba3-474e-9f0c-a061b988ff05"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:39:27 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "46"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Page deleted successfully\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Widgets",
+      "item": [
+        {
+          "name": "Create Widgets",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"type\": \"text\",\r\n  \"position\": 3,\r\n  \"config\": {\r\n    \"content\": \"Welcome to our store!\",\r\n    \"font_size\": 18\r\n  }\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/pages/f9808425-79ba-471c-b354-bd429c66d753/widgets",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "f9808425-79ba-471c-b354-bd429c66d753",
+                "widgets"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Banner",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"type\": \"banner\",\r\n  \"position\": 1,\r\n  \"config\": {\r\n    \"image_url\": \"https://store.com/sale.jpg\",\r\n    \"title\": \"Mega Sale\",\r\n    \"cta\": \"Shop Now\"\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/pages/f9808425-79ba-471c-b354-bd429c66d753/widgets",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages",
+                    "f9808425-79ba-471c-b354-bd429c66d753",
+                    "widgets"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:42:59 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "386"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"e95519e0-c852-4382-b003-1248ff5d71fb\",\n    \"page_id\": \"f9808425-79ba-471c-b354-bd429c66d753\",\n    \"type\": \"banner\",\n    \"position\": 1,\n    \"config\": {\n        \"image_url\": \"https://store.com/sale.jpg\",\n        \"title\": \"Mega Sale\",\n        \"cta\": \"Shop Now\"\n    },\n    \"created_at\": \"2026-02-10T00:12:59.459292+05:30\",\n    \"updated_at\": \"2026-02-10T00:12:59.459292+05:30\"\n}"
+            },
+            {
+              "name": "Product grid",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"type\": \"product_grid\",\r\n  \"position\": 2,\r\n  \"config\": {\r\n    \"collection\": \"featured\",\r\n    \"columns\": 2\r\n  }\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/pages/f9808425-79ba-471c-b354-bd429c66d753/widgets",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages",
+                    "f9808425-79ba-471c-b354-bd429c66d753",
+                    "widgets"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:43:44 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "342"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"a7b75f3e-831f-4180-a91d-ab14b0d701f9\",\n    \"page_id\": \"f9808425-79ba-471c-b354-bd429c66d753\",\n    \"type\": \"product_grid\",\n    \"position\": 2,\n    \"config\": {\n        \"collection\": \"featured\",\n        \"columns\": 2\n    },\n    \"created_at\": \"2026-02-10T00:13:44.5178845+05:30\",\n    \"updated_at\": \"2026-02-10T00:13:44.5178845+05:30\"\n}"
+            },
+            {
+              "name": "Text",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"type\": \"text\",\r\n  \"position\": 3,\r\n  \"config\": {\r\n    \"content\": \"Welcome to our store!\",\r\n    \"font_size\": 18\r\n  }\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/pages/f9808425-79ba-471c-b354-bd429c66d753/widgets",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages",
+                    "f9808425-79ba-471c-b354-bd429c66d753",
+                    "widgets"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:44:13 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "345"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"8d9ec544-cca8-4972-83aa-83ee4675f96b\",\n    \"page_id\": \"f9808425-79ba-471c-b354-bd429c66d753\",\n    \"type\": \"text\",\n    \"position\": 3,\n    \"config\": {\n        \"content\": \"Welcome to our store!\",\n        \"font_size\": 18\n    },\n    \"created_at\": \"2026-02-10T00:14:13.209449+05:30\",\n    \"updated_at\": \"2026-02-10T00:14:13.209449+05:30\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get all widgets of a page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/pages/f9808425-79ba-471c-b354-bd429c66d753",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "f9808425-79ba-471c-b354-bd429c66d753"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get all widgets of a page",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/pages/f9808425-79ba-471c-b354-bd429c66d753",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages",
+                    "f9808425-79ba-471c-b354-bd429c66d753"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:45:46 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1623"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"page\": {\n        \"id\": \"f9808425-79ba-471c-b354-bd429c66d753\",\n        \"name\": \"Home\",\n        \"route\": \"/home\",\n        \"is_home\": true,\n        \"created_at\": \"2026-02-10T00:04:49.925351Z\",\n        \"updated_at\": \"2026-02-10T00:07:51.052602Z\"\n    },\n    \"widgets\": [\n        {\n            \"id\": \"e95519e0-c852-4382-b003-1248ff5d71fb\",\n            \"page_id\": \"f9808425-79ba-471c-b354-bd429c66d753\",\n            \"type\": \"banner\",\n            \"position\": 1,\n            \"config\": {\n                \"cta\": \"Shop Now\",\n                \"title\": \"Mega Sale\",\n                \"image_url\": \"https://store.com/sale.jpg\"\n            },\n            \"created_at\": \"2026-02-10T00:12:59.459292Z\",\n            \"updated_at\": \"2026-02-10T00:12:59.459292Z\"\n        },\n        {\n            \"id\": \"a7b75f3e-831f-4180-a91d-ab14b0d701f9\",\n            \"page_id\": \"f9808425-79ba-471c-b354-bd429c66d753\",\n            \"type\": \"product_grid\",\n            \"position\": 2,\n            \"config\": {\n                \"columns\": 2,\n                \"collection\": \"featured\"\n            },\n            \"created_at\": \"2026-02-10T00:13:44.517884Z\",\n            \"updated_at\": \"2026-02-10T00:13:44.517884Z\"\n        },\n        {\n            \"id\": \"8d9ec544-cca8-4972-83aa-83ee4675f96b\",\n            \"page_id\": \"f9808425-79ba-471c-b354-bd429c66d753\",\n            \"type\": \"text\",\n            \"position\": 3,\n            \"config\": {\n                \"content\": \"Welcome to our store!\",\n                \"font_size\": 18\n            },\n            \"created_at\": \"2026-02-10T00:14:13.209449Z\",\n            \"updated_at\": \"2026-02-10T00:14:13.209449Z\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update a widget - banner",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"type\": \"banner\",\r\n  \"position\": 1,\r\n  \"config\": {\r\n    \"image_url\": \"https://store.com/sale-new.jpg\",\r\n    \"title\": \"BIGGEST SALE\",\r\n    \"cta\": \"Buy Now\"\r\n  }\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/widgets/e95519e0-c852-4382-b003-1248ff5d71fb",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "widgets",
+                "e95519e0-c852-4382-b003-1248ff5d71fb"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update a Widget - banner",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"type\": \"banner\",\r\n  \"position\": 1,\r\n  \"config\": {\r\n    \"image_url\": \"https://store.com/sale-new.jpg\",\r\n    \"title\": \"BIGGEST SALE\",\r\n    \"cta\": \"Buy Now\"\r\n  }\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/widgets/e95519e0-c852-4382-b003-1248ff5d71fb",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "widgets",
+                    "e95519e0-c852-4382-b003-1248ff5d71fb"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:48:30 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "344"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": \"e95519e0-c852-4382-b003-1248ff5d71fb\",\n    \"page_id\": \"\",\n    \"type\": \"banner\",\n    \"position\": 1,\n    \"config\": {\n        \"image_url\": \"https://store.com/sale-new.jpg\",\n        \"title\": \"BIGGEST SALE\",\n        \"cta\": \"Buy Now\"\n    },\n    \"created_at\": \"0001-01-01T00:00:00Z\",\n    \"updated_at\": \"2026-02-10T00:18:30.255699+05:30\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Reorder widgets of a page",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"widget_ids\": [\r\n    \"e95519e0-c852-4382-b003-1248ff5d71fb\",\r\n    \"8d9ec544-cca8-4972-83aa-83ee4675f96b\",\r\n    \"a7b75f3e-831f-4180-a91d-ab14b0d701f9\"\r\n  ]\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/pages/f9808425-79ba-471c-b354-bd429c66d753/widgets/reorder",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "pages",
+                "f9808425-79ba-471c-b354-bd429c66d753",
+                "widgets",
+                "reorder"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Reorder widgets of a page",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"widget_ids\": [\r\n    \"e95519e0-c852-4382-b003-1248ff5d71fb\",\r\n    \"8d9ec544-cca8-4972-83aa-83ee4675f96b\",\r\n    \"a7b75f3e-831f-4180-a91d-ab14b0d701f9\"\r\n  ]\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/pages/f9808425-79ba-471c-b354-bd429c66d753/widgets/reorder",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "pages",
+                    "f9808425-79ba-471c-b354-bd429c66d753",
+                    "widgets",
+                    "reorder"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:53:02 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "51"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Widgets reordered successfully\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete a widget",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"widget_ids\": [\r\n    \"e95519e0-c852-4382-b003-1248ff5d71fb\",\r\n    \"8d9ec544-cca8-4972-83aa-83ee4675f96b\",\r\n    \"a7b75f3e-831f-4180-a91d-ab14b0d701f9\"\r\n  ]\r\n}\r\n"
+            },
+            "url": {
+              "raw": "{{base_url}}/widgets/8d9ec544-cca8-4972-83aa-83ee4675f96b",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "widgets",
+                "8d9ec544-cca8-4972-83aa-83ee4675f96b"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete a widget",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"widget_ids\": [\r\n    \"e95519e0-c852-4382-b003-1248ff5d71fb\",\r\n    \"8d9ec544-cca8-4972-83aa-83ee4675f96b\",\r\n    \"a7b75f3e-831f-4180-a91d-ab14b0d701f9\"\r\n  ]\r\n}\r\n"
+                },
+                "url": {
+                  "raw": "{{base_url}}/widgets/8d9ec544-cca8-4972-83aa-83ee4675f96b",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "widgets",
+                    "8d9ec544-cca8-4972-83aa-83ee4675f96b"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Date",
+                  "value": "Mon, 09 Feb 2026 18:55:53 GMT"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "48"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"message\": \"Widget deleted successfully\"\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    }
+  ]
+}

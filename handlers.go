@@ -12,8 +12,9 @@ import (
 // errorResponse - for a consistent error format
 // example - errorResponse(c, 500, "DB_ERROR", "Database error")
 func errorResponse(c *gin.Context, status int, code string, message string) {
-	c.JSON(status, gin.H{
+	c.IndentedJSON(status, gin.H{
 		"error": gin.H{
+			"status":  status,
 			"code":    code,
 			"message": message,
 		},
@@ -71,7 +72,7 @@ func CreatePage(c *gin.Context) {
 	}
 
 	// 6. Return created page
-	c.JSON(http.StatusCreated, page)
+	c.IndentedJSON(http.StatusCreated, page)
 }
 
 // GetPages - GET /pages
@@ -111,7 +112,7 @@ func GetPages(c *gin.Context) {
 	}
 
 	// Return list of pages
-	c.JSON(http.StatusOK, pages)
+	c.IndentedJSON(http.StatusOK, pages)
 
 }
 
@@ -181,7 +182,7 @@ func GetPageByID(c *gin.Context) {
 	}
 
 	// 3: Return page + widgets
-	c.JSON(http.StatusOK, gin.H{
+	c.IndentedJSON(http.StatusOK, gin.H{
 		"page":    page,
 		"widgets": widgets,
 	})
@@ -262,7 +263,7 @@ func UpdatePage(c *gin.Context) {
 	input.ID = id
 	input.UpdatedAt = time.Now()
 
-	c.JSON(http.StatusOK, input)
+	c.IndentedJSON(http.StatusOK, input)
 }
 
 // DeletePage - DELETE /pages/:id
@@ -302,7 +303,7 @@ func DeletePage(c *gin.Context) {
 	}
 
 	// 4: Success response
-	c.JSON(http.StatusOK, gin.H{
+	c.IndentedJSON(http.StatusOK, gin.H{
 		"message": "Page deleted successfully",
 	})
 }
@@ -342,6 +343,11 @@ func CreateWidget(c *gin.Context) {
 	}
 
 	// 3: Validate widget type
+	if widget.Type == "" {
+		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "Invalid widget type")
+		return
+	}
+
 	if !validWidgetTypes[widget.Type] {
 		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "Invalid widget type")
 		return
@@ -374,7 +380,7 @@ func CreateWidget(c *gin.Context) {
 	}
 
 	// 6: Return created widget
-	c.JSON(http.StatusCreated, widget)
+	c.IndentedJSON(http.StatusCreated, widget)
 }
 
 // UpdateWidget - PUT /widgets/:id
@@ -428,7 +434,7 @@ func UpdateWidget(c *gin.Context) {
 	input.ID = id
 	input.UpdatedAt = time.Now()
 
-	c.JSON(http.StatusOK, input)
+	c.IndentedJSON(http.StatusOK, input)
 }
 
 // DeleteWidget - DELETE /widgets/:id
@@ -462,7 +468,7 @@ func DeleteWidget(c *gin.Context) {
 	}
 
 	// 3: Success response
-	c.JSON(http.StatusOK, gin.H{
+	c.IndentedJSON(http.StatusOK, gin.H{
 		"message": "Widget deleted successfully",
 	})
 }
@@ -517,7 +523,7 @@ func ReorderWidgets(c *gin.Context) {
 	}
 
 	// 4: Success response
-	c.JSON(http.StatusOK, gin.H{
+	c.IndentedJSON(http.StatusOK, gin.H{
 		"message": "Widgets reordered successfully",
 	})
 }
