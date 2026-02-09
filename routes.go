@@ -10,5 +10,6 @@ func SetupRoutes(router *gin.Engine) {
 	router.DELETE("/pages/:id", DeletePage)
 
 	router.POST("/pages/:id/widgets", CreateWidget)
-
+	router.PUT("/widgets/:id", UpdateWidget)
+	router.DELETE("/widgets/:id", DeleteWidget)
 }

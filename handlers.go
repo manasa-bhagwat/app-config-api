@@ -376,3 +376,93 @@ func CreateWidget(c *gin.Context) {
 	// 6: Return created widget
 	c.JSON(http.StatusCreated, widget)
 }
+
+// UpdateWidget - PUT /widgets/:id
+func UpdateWidget(c *gin.Context) {
+	id := c.Param("id")
+
+	var input Widget
+
+	// 1: Read JSON body
+	if err := c.ShouldBindJSON(&input); err != nil {
+		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "Invalid request body")
+		return
+	}
+
+	// 2: Validate widget type
+	if !validWidgetTypes[input.Type] {
+		errorResponse(c, http.StatusBadRequest, "VALIDATION_ERROR", "Invalid widget type")
+		return
+	}
+
+	// 3: Check if widget exists
+	var exists bool
+	err := DB.QueryRow(`
+		SELECT EXISTS(SELECT 1 FROM widgets WHERE id = $1)
+	`, id).Scan(&exists)
+
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Database error")
+		return
+	}
+
+	if !exists {
+		errorResponse(c, http.StatusNotFound, "NOT_FOUND", "Widget not found")
+		return
+	}
+
+	// 4: Update widget
+	query := `
+		UPDATE widgets
+		SET type = $1, position = $2, config = $3, updated_at = $4
+		WHERE id = $5
+	`
+
+	_, err = DB.Exec(query, input.Type, input.Position, input.Config, time.Now(), id)
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Failed to update widget")
+		return
+	}
+
+	// 5: Return updated widget
+	input.ID = id
+	input.UpdatedAt = time.Now()
+
+	c.JSON(http.StatusOK, input)
+}
+
+// DeleteWidget - DELETE /widgets/:id
+func DeleteWidget(c *gin.Context) {
+	id := c.Param("id")
+
+	// 1: Check if widget exists
+	var exists bool
+	err := DB.QueryRow(`
+		SELECT EXISTS(SELECT 1 FROM widgets WHERE id = $1)
+	`, id).Scan(&exists)
+
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Database error")
+		return
+	}
+
+	if !exists {
+		errorResponse(c, http.StatusNotFound, "NOT_FOUND", "Widget not found")
+		return
+	}
+
+	// 2: Delete widget
+	_, err = DB.Exec(`
+		DELETE FROM widgets WHERE id = $1
+	`, id)
+
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Failed to delete widget")
+		return
+	}
+
+	// 3: Success response
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Widget deleted successfully",
+	})
+}
