@@ -7,5 +7,5 @@ func SetupRoutes(router *gin.Engine) {
 	router.GET("/pages", GetPages)
 	router.GET("/pages/:id", GetPageByID)
 	router.PUT("/pages/:id", UpdatePage)
-
+	router.DELETE("/pages/:id", DeletePage)
 }

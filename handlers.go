@@ -264,3 +264,45 @@ func UpdatePage(c *gin.Context) {
 
 	c.JSON(http.StatusOK, input)
 }
+
+// DeletePage - DELETE /pages/:id
+func DeletePage(c *gin.Context) {
+	id := c.Param("id")
+
+	// 1: Check if page exists and whether it is home
+	var isHome bool
+	err := DB.QueryRow(`
+		SELECT is_home FROM pages WHERE id = $1
+	`, id).Scan(&isHome)
+
+	if err == sql.ErrNoRows {
+		errorResponse(c, http.StatusNotFound, "NOT_FOUND", "Page not found")
+		return
+	}
+
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Database error")
+		return
+	}
+
+	// 2: Prevent deleting home page
+	if isHome {
+		errorResponse(c, http.StatusConflict, "CONFLICT", "Cannot delete the home page")
+		return
+	}
+
+	// 3: Delete page
+	_, err = DB.Exec(`
+		DELETE FROM pages WHERE id = $1
+	`, id)
+
+	if err != nil {
+		errorResponse(c, http.StatusInternalServerError, "DB_ERROR", "Failed to delete page")
+		return
+	}
+
+	// 4: Success response
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Page deleted successfully",
+	})
+}
